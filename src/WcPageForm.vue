@@ -47,7 +47,7 @@ const props = defineProps({
     },
     title: String,
     width: {
-        type: String,
+        type: [String, Number],
         default: '50vw',
     },
     widthLabel: {
@@ -112,6 +112,22 @@ const { proxy } = getCurrentInstance()!
 
 const className = computed(() => `wc-form ${props.class}`)
 const isDrawer = computed(() => props.wrapType === 'drawer')
+const normalizeWrapSize = (rawWidth: string | number) => {
+    if (typeof rawWidth === 'number') {
+        return rawWidth
+    }
+    const pixelMatch = /^(\d+(?:\.\d+)?)px$/i.exec(rawWidth.trim())
+    if (pixelMatch) {
+        return Number(pixelMatch[1])
+    }
+    return rawWidth
+}
+const drawerSize = computed(() => (
+    isDrawer.value ? normalizeWrapSize(props.width) : undefined
+))
+const modalWidth = computed(() => (
+    isDrawer.value ? undefined : normalizeWrapSize(props.width)
+))
 const WrapComponent = computed(() => (isDrawer.value ? Drawer : Modal))
 const formTitle = computed(() => `${isEdit.value ? '编辑' : '新增'}${props.title || ''}`)
 const visible = ref(false)
@@ -168,12 +184,12 @@ const formParams = computed((): FormParamItem[] => {
             const placeholderSuffix = props.widthLabel ? '' : fieldItem.title
             const placeholder =
                 {
-                    range: [`请输�?{placeholderSuffix}`, `请输�?{placeholderSuffix}`],
-                    rTime: [`请输�?{placeholderSuffix}`, `请输�?{placeholderSuffix}`],
+                    range: [`请输入${placeholderSuffix}`, `请输入${placeholderSuffix}`],
+                    rTime: [`请输入${placeholderSuffix}`, `请输入${placeholderSuffix}`],
                     select: `请选择${placeholderSuffix}`,
                     multipleSelect: `请选择${placeholderSuffix}`,
                     tree: `请选择${placeholderSuffix}`,
-                }[String(type)] || `请输�?{placeholderSuffix}`
+                }[String(type)] || `请输入${placeholderSuffix}`
 
             const fieldParams: Record<string, unknown> = {
                 placeholder,
@@ -417,8 +433,8 @@ defineExpose({
         :is="WrapComponent"
         :open="visible"
         :title="formTitle"
-        :size="isDrawer ? width : undefined"
-        :width="isDrawer ? undefined : width"
+        :size="drawerSize"
+        :width="modalWidth"
         :class="className"
         :destroy-on-close="true"
         :mask-closable="false"

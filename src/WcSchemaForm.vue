@@ -28,7 +28,7 @@ const formState = reactive<Record<string, unknown>>({})
 const isGeomField = (fieldItem: PageField) =>
     fieldItem.inputType === 'geom' || fieldItem.lockReason === 'geometry'
 
-const GEOM_PLACEHOLDER = '请输�?GeoJSON Geometry，例�?Point: { type, coordinates: [lng, lat] }'
+const GEOM_PLACEHOLDER = '请输入 GeoJSON Geometry，例如 Point: { type, coordinates: [lng, lat] }'
 
 const resolvePlaceholder = (fieldItem: PageField) => {
     if (isGeomField(fieldItem)) {
