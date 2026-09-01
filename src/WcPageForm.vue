@@ -21,7 +21,7 @@ import {
 } from 'antdv-next'
 import { clone, treeDataMake } from 'wc-utils'
 import type { DomainMap } from 'wc-utils'
-import type { PageField } from 'wc-page-core'
+import type { PageField } from 'wc-core'
 
 type FormParamItem = PageField & {
     size: string
@@ -110,7 +110,7 @@ const props = defineProps({
 
 const { proxy } = getCurrentInstance()!
 
-const className = computed(() => `wc-page-form ${props.class}`)
+const className = computed(() => `wc-form ${props.class}`)
 const isDrawer = computed(() => props.wrapType === 'drawer')
 const WrapComponent = computed(() => (isDrawer.value ? Drawer : Modal))
 const formTitle = computed(() => `${isEdit.value ? '编辑' : '新增'}${props.title || ''}`)
@@ -168,12 +168,12 @@ const formParams = computed((): FormParamItem[] => {
             const placeholderSuffix = props.widthLabel ? '' : fieldItem.title
             const placeholder =
                 {
-                    range: [`请输�?{placeholderSuffix}`, `请输�?{placeholderSuffix}`],
-                    rTime: [`请输�?{placeholderSuffix}`, `请输�?{placeholderSuffix}`],
+                    range: [`请输�?{placeholderSuffix}`, `请输�?{placeholderSuffix}`],
+                    rTime: [`请输�?{placeholderSuffix}`, `请输�?{placeholderSuffix}`],
                     select: `请选择${placeholderSuffix}`,
                     multipleSelect: `请选择${placeholderSuffix}`,
                     tree: `请选择${placeholderSuffix}`,
-                }[String(type)] || `请输�?{placeholderSuffix}`
+                }[String(type)] || `请输�?{placeholderSuffix}`
 
             const fieldParams: Record<string, unknown> = {
                 placeholder,
@@ -431,7 +431,7 @@ defineExpose({
             :layout="layout"
             :model="formData"
             :rules="rules"
-            class="wc-page-form-inner"
+            class="wc-form-inner"
             size="small"
             v-bind="$attrs"
         >

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive, watch } from 'vue'
-import type { PageField } from 'wc-page-core'
-import { isAuditColumn } from 'wc-page-core'
+import type { PageField } from 'wc-core'
+import { isAuditColumn } from 'wc-core'
 
 const props = withDefaults(defineProps<{
     fields: PageField[]
@@ -28,7 +28,7 @@ const formState = reactive<Record<string, unknown>>({})
 const isGeomField = (fieldItem: PageField) =>
     fieldItem.inputType === 'geom' || fieldItem.lockReason === 'geometry'
 
-const GEOM_PLACEHOLDER = '请输�?GeoJSON Geometry，例�?Point: { type, coordinates: [lng, lat] }'
+const GEOM_PLACEHOLDER = '请输�?GeoJSON Geometry，例�?Point: { type, coordinates: [lng, lat] }'
 
 const resolvePlaceholder = (fieldItem: PageField) => {
     if (isGeomField(fieldItem)) {
