@@ -436,7 +436,7 @@ defineExpose({
         :size="drawerSize"
         :width="modalWidth"
         :class="className"
-        :destroy-on-close="true"
+        :destroy-on-hidden="true"
         :mask-closable="false"
         v-bind="wrapParams"
         @close="handleClose"

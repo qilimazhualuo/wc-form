@@ -184,6 +184,9 @@ defineExpose({
                     :name="`field-control-${fieldItem.field}`"
                     :field="fieldItem"
                     :disabled="disabled || isFieldReadonly(fieldItem)"
+                    :formData="formState"
+                    :value="formState[fieldItem.field]"
+                    :onChange="handleFieldChange"
                 >
                     <a-textarea
                         v-if="fieldItem.inputType === 'textarea' || isGeomField(fieldItem)"
