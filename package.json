@@ -24,12 +24,10 @@
         "**/*.vue",
         "**/*.less"
     ],
-    "peerDependencies": {
-        "antdv-next": "^1.3.5",
-        "vue": "^3.5.13"
-    },
     "dependencies": {
-        "dayjs": "^1.11.13",
+        "antdv-next": "1.4.6",
+        "dayjs": "1.11.21",
+        "vue": "3.5.40",
         "wc-core": "0.0.1",
         "wc-utils": "0.0.1"
     }
